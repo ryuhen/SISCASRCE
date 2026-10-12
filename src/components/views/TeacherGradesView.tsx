@@ -600,7 +600,7 @@ export const TeacherGradesView: React.FC = () => {
                   </h2>
                 </div>
                 <p className="text-xs text-slate-600 mt-1 max-w-3xl leading-relaxed">
-                  El <strong>PER</strong> es la oportunidad académica formal de recuperación para estudiantes que no alcanzaron la nota mínima en el régimen ordinario (mínimo 12/20 pts en regulares o 16/20 pts en proyecto).
+                  El <strong>PER</strong> es la oportunidad académica formal de recuperación para estudiantes que no alcanzaron la nota mínima en el régimen ordinario (mínimo 12/20 pts en regulares o 16/20 pts en proyecto). 
                   Al asentar la nota recuperatoria y la observación para el Consejo Docente, la unidad curricular queda convalidada en el récord académico del estudiante con mención especial.
                 </p>
               </div>
