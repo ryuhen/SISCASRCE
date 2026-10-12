@@ -1,0 +1,223 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  cedula    String   @unique
+  name      String
+  email     String   @unique
+  phone     String
+  role      String
+  pnfId     String?
+  sedeId    String?
+  avatar    String
+  title     String?
+  status    String   @default("Activo")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Sede {
+  id                   String   @id @default(uuid())
+  code                 String   @unique
+  name                 String
+  city                 String
+  address              String
+  phone                String
+  pnfIdsOfferedJson    String   // JSON string of string[]
+  carsceCoordinatorId  String?
+  pnfCoordinatorsMapJson String? // JSON string of Record<string, string>
+}
+
+model PNF {
+  id                String   @id @default(uuid())
+  code              String   @unique
+  name              String
+  modality          String
+  tramosPerTrayecto Int
+  totalTrayectos    Int
+  description       String
+  sedeIdsJson       String   // JSON string of string[]
+  coordinatorId     String
+  colorThemeJson    String   // JSON string of PnfColorTheme
+}
+
+model AcademicPeriod {
+  id                           String   @id @default(uuid())
+  code                         String   @unique
+  name                         String
+  year                         Int
+  type                         String
+  season                       String?
+  startDate                    String
+  endDate                      String
+  isCurrent                    Boolean  @default(false)
+  status                       String   @default("Planificación")
+  recoveryNotesClosingRequired Boolean? @default(false)
+  notesClosingStatus           String?  @default("Pendiente")
+  perRegistrationOpen          Boolean? @default(false)
+}
+
+model PerRecoveryRecord {
+  id                 String   @id @default(uuid())
+  periodId           String
+  studentId          String
+  curricularUnitId   String
+  sectionCode        String?
+  originalPeriodCode String
+  originalScore      Float
+  recoveryScore      Float?
+  recoveryStatus     String
+  evaluationDate     String?
+  teacherObservation String?
+  evaluatorId        String?
+  evaluatorName      String?
+  updatedAt          String
+}
+
+model CurricularUnit {
+  id                       String   @id @default(uuid())
+  pnfId                    String
+  code                     String   @unique
+  name                     String
+  trayecto                 Int
+  tramo                    Int
+  horasAcademicasSemanales Int
+  totalPlannedSessions     Int
+  isProject                Boolean  @default(false)
+  synopsis                 String?
+  unitsContentJson         String?  // JSON string of SyllabusUnit[]
+  sedeIdsJson              String?  // JSON string of string[]
+}
+
+model Section {
+  id               String   @id @default(uuid())
+  curricularUnitId String
+  pnfId            String
+  sedeId           String
+  code             String   @unique
+  periodId         String
+  trayecto         Int
+  tramo            Int
+  professorId      String
+  assistantId      String?
+  maxCapacity      Int
+  shift            String
+  schedulesJson    String   // JSON string of DaySchedule[]
+  actaStatus       String   @default("Borrador")
+}
+
+model ClassSession {
+  id            String   @id @default(uuid())
+  sectionId     String
+  sessionNumber Int
+  date          String
+  topic         String
+  objective     String
+  registeredBy String
+  registeredAt String
+  isCompleted   Boolean  @default(false)
+  notes         String?
+}
+
+model AttendanceRecord {
+  id                  String   @id @default(uuid())
+  sessionId           String
+  sectionId           String
+  studentId           String
+  status              String
+  justificationReason String?
+  updatedAt           String
+}
+
+model EvaluationPlanItem {
+  id               String   @id @default(uuid())
+  sectionId        String
+  corteNumber      Int
+  title            String
+  weightPercentage Float
+  maxScore         Float    @default(20)
+  instrument       String
+  dueDate          String
+  isPublished      Boolean  @default(false)
+}
+
+model GradeRecord {
+  id                   String   @id @default(uuid())
+  evaluationPlanItemId String
+  sectionId            String
+  studentId            String
+  score                Float
+  feedback             String?
+  updatedBy            String
+  updatedAt            String
+}
+
+model StudentObservation {
+  id                    String   @id @default(uuid())
+  studentId             String
+  sectionId             String
+  date                  String
+  category              String
+  note                  String
+  recommendationCouncil String
+  authorId              String
+  authorName            String
+  createdAt             String
+}
+
+model Enrollment {
+  id             String   @id @default(uuid())
+  studentId      String
+  sectionId      String
+  periodId       String
+  status         String
+  enrollmentDate String
+  finalGrade     Float?
+}
+
+model PreRegistration {
+  id              String   @id @default(uuid())
+  cedula          String   @unique
+  firstName       String
+  lastName        String
+  email           String
+  phone           String
+  pnfId           String
+  sedeId          String
+  birthDate       String
+  highSchool      String
+  graduationYear  Int
+  address         String
+  shiftPreference String
+  status          String   @default("Pendiente")
+  reviewNotes     String?
+  documentsJson   String   // JSON string of document metadata
+  createdAt       String
+  reviewedBy      String?
+  reviewedAt      String?
+}
+
+model SystemNotification {
+  id           String   @id @default(uuid())
+  targetRole   String?
+  targetUserId String?
+  targetPnfId  String?
+  title        String
+  message      String
+  type         String
+  createdAt    String
+  read         Boolean  @default(false)
+  category     String
+}
+
+model SystemConfig {
+  key   String @id
+  value String // JSON string holding evaluation engine config or drive config
+}

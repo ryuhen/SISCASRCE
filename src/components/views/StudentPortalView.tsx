@@ -530,6 +530,7 @@ export const StudentPortalView: React.FC = () => {
                   </h2>
                 </div>
                 <p className="text-xs text-slate-600 mt-1 max-w-3xl leading-relaxed">
+                  El <strong>PER</strong> es una convocatoria extraordinaria activada por Control de Estudio (SisCasrce) según la época del año y tras la culminación de la carga de notas del período regular.
                   El <strong>PER</strong> es una convocatoria extraordinaria activada por Control de Estudio (SisCasrce) según la época del año y tras la culminación de la carga de notas del período regular. 
                   Te brinda la oportunidad formal de recuperar unidades curriculares reprobadas para evitar el arrastre y avanzar con normalidad hacia el siguiente trayecto.
                 </p>

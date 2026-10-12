@@ -523,6 +523,8 @@ export const AdminConfigView: React.FC = () => {
                   </h2>
                 </div>
                 <p className="text-xs text-slate-600 mt-1 max-w-3xl leading-relaxed">
+                  Cada <strong>Año Lectivo</strong> comprende tres modalidades de períodos que dependen de la época del calendario y del avance de calificaciones:
+                  <strong> Pregrado Regular</strong> (semestral/trimestral), <strong>Intensivo</strong> (avance vacacional) y el
                   Cada <strong>Año Lectivo</strong> comprende tres modalidades de períodos que dependen de la época del calendario y del avance de calificaciones: 
                   <strong> Pregrado Regular</strong> (semestral/trimestral), <strong>Intensivo</strong> (avance vacacional) y el 
                   <strong> Plan Especial de Recuperación (PER)</strong>. El PER se activa tras el <strong>cierre oficial de notas ordinarias</strong> para dar a los estudiantes la oportunidad formal de recuperar unidades curriculares reprobadas.
