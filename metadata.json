@@ -1,0 +1,6 @@
+{
+  "name": "SIGA-PNF - Sistema de Gestión Académica Interconectado",
+  "description": "Sistema académico integral para Programas Nacionales de Formación (PNF): gestión de calificaciones, horarios, matriz de asistencia, preinscripción/inscripción, roles granulares y supervisión en tiempo real para estudiantes, docentes, coordinadores de PNF y Control de Estudio (CARSCE).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
